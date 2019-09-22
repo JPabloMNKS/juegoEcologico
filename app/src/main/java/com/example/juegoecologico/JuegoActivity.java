@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -85,7 +86,10 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this,ex.toString(),Toast.LENGTH_LONG).show();
         }
 
+
+
     }
+
 
     protected void funcionAleatorio(){
         // Esta funcion crea numeros aleatorios de 0 a el tamaño de nombre en juego.java
@@ -136,59 +140,56 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
 
     private void juegoTerminado(int a){
         frase++;
-        Toast.makeText(this,frase+""+aleatorioFrase.size(),Toast.LENGTH_LONG).show();
         if(a == aleatorioFrase.size()-1){
             Intent intent = new Intent(getApplicationContext(),ResultadoActivity.class);
-            intent.putExtra("Puntaje",puntaje);
+            intent.putExtra("Puntaje",String.valueOf(puntaje));
             startActivity(intent);
             finish();
         }else{
             llenado();
         }
-
     }
-
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.card_one:
-                if(txtNombre1.getText().toString() == juego.getRespuesta(numFrase)){
+                if(txtNombre1.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
                 juegoTerminado(frase);
                 break;
             case R.id.card_two:
-                if(txtNombre2.getText().toString() == juego.getRespuesta(numFrase)) {
+                if(txtNombre2.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))) {
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: " + puntaje);
                 }
                 juegoTerminado(frase);
                 break;
             case R.id.card_three:
-                if(txtNombre3.getText().toString() == juego.getRespuesta(numFrase)){
+                if(txtNombre3.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
                 juegoTerminado(frase);
                 break;
             case R.id.card_four:
-                if(txtNombre4.getText().toString() == juego.getRespuesta(numFrase)){
+                if(txtNombre4.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
                 juegoTerminado(frase);
                 break;
             case R.id.card_five:
-                if(txtNombre5.getText().toString() == juego.getRespuesta(numFrase)){
+                if(txtNombre5.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
                 juegoTerminado(frase);
                 break;
             case R.id.card_six:
-                if(txtNombre6.getText().toString() == juego.getRespuesta(numFrase)){
+                if(txtNombre6.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }

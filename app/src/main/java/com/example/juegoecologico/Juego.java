@@ -1,5 +1,9 @@
 package com.example.juegoecologico;
 
+import android.content.Context;
+import android.content.res.Resources;
+
+
 public class Juego {
     public Juego() {
     }
@@ -28,6 +32,11 @@ public class Juego {
             "si",
             "talvez"
     };
+
+//    Context context;
+//    Resources res = getResources();
+  //  String[] planetas = res.getStringArray(R.array.planets_array);
+
 
     public Juego(String nombre[][], String[] frase, int[][] thumbnail, String[] respuestaCorrecta) {
         this.nombre = nombre;

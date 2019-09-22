@@ -21,6 +21,8 @@ public class ResultadoActivity extends AppCompatActivity {
         txtPuntaje = findViewById(R.id.txt_puntaje);
         btnTerminar = findViewById(R.id.btn_terminar);
 
+        Intent recibir = getIntent();
+        txtPuntaje.setText("Tu puntaje es: "+ recibir.getStringExtra("Puntaje"));
 
     }
 
