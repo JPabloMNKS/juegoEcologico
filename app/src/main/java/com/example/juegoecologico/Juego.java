@@ -9,7 +9,6 @@ public class Juego {
             { "si","no","no","no","no","no"},
             { "no","no ","no","si","no","no"},
             { "no","no","no","no","no","talvez"},
-
     };
     private String[] frase = {
             "Esta es una frase sobre la coca cola",

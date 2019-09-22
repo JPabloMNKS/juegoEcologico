@@ -3,6 +3,7 @@ package com.example.juegoecologico;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,8 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     int puntaje=0;
     ArrayList<Integer> aleatorioNombre;
     ArrayList<Integer> aleatorioFrase;
+    int frase=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
 
 
         try{
+            setAleatorioFrase();
             llenado();
         }catch (Exception ex){
             Toast.makeText(this,ex.toString(),Toast.LENGTH_LONG).show();
@@ -84,11 +88,12 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     }
 
     protected void funcionAleatorio(){
+        // Esta funcion crea numeros aleatorios de 0 a el tamaño de nombre en juego.java
         int aux = 0;
-
         aleatorioNombre = new ArrayList<Integer>(juego.getTamNombre());
         while (aux < juego.getTamNombre()){
             num = random.nextInt(juego.getTamNombre());
+            // Ingresa un numero aleatorio si no se encuentra en el arreglo aleatorioNombre
             if(!aleatorioNombre.contains(num)){
                 aleatorioNombre.add(num);
                 aux++;
@@ -96,17 +101,29 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void setAleatorioFrase(){
+        int aux1 = 0;
+        aleatorioFrase = new ArrayList<Integer>(juego.getTamFrase());
+        while (aux1 < juego.getTamFrase()){
+            num = random.nextInt(juego.getTamFrase());
+            if(!aleatorioFrase.contains(num)){
+                aleatorioFrase.add(num);
+                aux1++;
+            }
+        }
+    }
+
     private void llenado(){
         funcionAleatorio();
         numFrase = random.nextInt(4);
-        txtFrase.setText(juego.getFrase(numFrase));
+        txtFrase.setText(juego.getFrase(aleatorioFrase.get(frase)));
 
-        txtNombre1.setText(juego.getNombre(numFrase, aleatorioNombre.get(0)));
-        txtNombre2.setText(juego.getNombre(numFrase, aleatorioNombre.get(1)));
-        txtNombre3.setText(juego.getNombre(numFrase, aleatorioNombre.get(2)));
-        txtNombre4.setText(juego.getNombre(numFrase, aleatorioNombre.get(3)));
-        txtNombre5.setText(juego.getNombre(numFrase, aleatorioNombre.get(4)));
-        txtNombre6.setText(juego.getNombre(numFrase, aleatorioNombre.get(5)));
+        txtNombre1.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(0)));
+        txtNombre2.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(1)));
+        txtNombre3.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(2)));
+        txtNombre4.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(3)));
+        txtNombre5.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(4)));
+        txtNombre6.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(5)));
 
         imgThumb1.setImageResource(juego.getThumbnail(0,aleatorioNombre.get(0)));
         imgThumb2.setImageResource(juego.getThumbnail(0,aleatorioNombre.get(1)));
@@ -114,6 +131,20 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         imgThumb4.setImageResource(juego.getThumbnail(0,aleatorioNombre.get(3)));
         imgThumb5.setImageResource(juego.getThumbnail(0,aleatorioNombre.get(4)));
         imgThumb6.setImageResource(juego.getThumbnail(0,aleatorioNombre.get(5)));
+
+    }
+
+    private void juegoTerminado(int a){
+        frase++;
+        Toast.makeText(this,frase+""+aleatorioFrase.size(),Toast.LENGTH_LONG).show();
+        if(a == aleatorioFrase.size()-1){
+            Intent intent = new Intent(getApplicationContext(),ResultadoActivity.class);
+            intent.putExtra("Puntaje",puntaje);
+            startActivity(intent);
+            finish();
+        }else{
+            llenado();
+        }
 
     }
 
@@ -126,42 +157,42 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
-                llenado();
+                juegoTerminado(frase);
                 break;
             case R.id.card_two:
                 if(txtNombre2.getText().toString() == juego.getRespuesta(numFrase)) {
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: " + puntaje);
                 }
-                llenado();
+                juegoTerminado(frase);
                 break;
             case R.id.card_three:
                 if(txtNombre3.getText().toString() == juego.getRespuesta(numFrase)){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
-                llenado();
+                juegoTerminado(frase);
                 break;
             case R.id.card_four:
                 if(txtNombre4.getText().toString() == juego.getRespuesta(numFrase)){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
-                llenado();
+                juegoTerminado(frase);
                 break;
             case R.id.card_five:
                 if(txtNombre5.getText().toString() == juego.getRespuesta(numFrase)){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
-                llenado();
+                juegoTerminado(frase);
                 break;
             case R.id.card_six:
                 if(txtNombre6.getText().toString() == juego.getRespuesta(numFrase)){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
                 }
-                llenado();
+                juegoTerminado(frase);
                 break;
         }
     }
