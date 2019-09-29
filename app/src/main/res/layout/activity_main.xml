@@ -7,36 +7,51 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:src="@drawable/mundo"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="250dp"
-        android:layout_height="250dp"/>
+    <LinearLayout
+        android:background="@color/fondo"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="300dp">
 
-    <Button
-        android:id="@+id/btn_juego"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Juego"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <ImageView
+            android:src="@drawable/mundo"
+            android:layout_width="250dp"
+            android:layout_height="250dp"/>
 
-    <Button
-        android:id="@+id/btn_instrucciones"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Instrucciones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_about"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Acerca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:background="@color/fondo_claro"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <Button
+            style="@style/btnStyle"
+            android:id="@+id/btn_juego"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/txt_juego"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            style="@style/btnStyle"
+            android:id="@+id/btn_instrucciones"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/txt_instrucciones"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            style="@style/btnStyle"
+            android:id="@+id/btn_about"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Acerca"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

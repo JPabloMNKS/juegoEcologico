@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">JuegoEcologico</string>
     <string name="txt_felicidades">Felicidades ahora tienes más conocimientos sobre estos temas, sigue adelante por un mundo mejor</string>
+    <string name="txt_juego">Juego</string>
+    <string name="txt_instrucciones">Instrucciones</string>
+    <string name="txt_puntuacion">La puntuacion es de:</string>
+    <string name="txt_tiempo">Tiempo:</string>
 
 
     <string-array name="planets_array">

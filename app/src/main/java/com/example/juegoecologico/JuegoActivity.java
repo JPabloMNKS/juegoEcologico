@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +22,11 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
     ImageView imgThumb1,imgThumb2,imgThumb3,imgThumb4,imgThumb5,imgThumb6;
     TextView txtPuntaje;
 
-    Button btnPrueba;
+    // preueba
+    TextView btnPrueba;
     int numFrase;
+    boolean apretado;
+
 
     Juego juego = new Juego();
     Random random = new Random();
@@ -69,6 +71,8 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         imgThumb6 = findViewById(R.id.img_thumbnail_6);
 
         // prueba
+        btnPrueba = findViewById(R.id.txt_tiempo);
+
 
         //Click Listeners
         cardOne.setOnClickListener(this);
@@ -82,14 +86,12 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         try{
             setAleatorioFrase();
             llenado();
+            tiempo();
         }catch (Exception ex){
             Toast.makeText(this,ex.toString(),Toast.LENGTH_LONG).show();
         }
-
-
-
+        apretado = false;
     }
-
 
     protected void funcionAleatorio(){
         // Esta funcion crea numeros aleatorios de 0 a el tamaño de nombre en juego.java
@@ -104,7 +106,6 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
           }
         }
     }
-
     private void setAleatorioFrase(){
         int aux1 = 0;
         aleatorioFrase = new ArrayList<Integer>(juego.getTamFrase());
@@ -116,10 +117,8 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
     private void llenado(){
         funcionAleatorio();
-        numFrase = random.nextInt(4);
         txtFrase.setText(juego.getFrase(aleatorioFrase.get(frase)));
 
         txtNombre1.setText(juego.getNombre(aleatorioFrase.get(frase), aleatorioNombre.get(0)));
@@ -137,7 +136,6 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
         imgThumb6.setImageResource(juego.getThumbnail(0,aleatorioNombre.get(5)));
 
     }
-
     private void juegoTerminado(int a){
         frase++;
         if(a == aleatorioFrase.size()-1){
@@ -147,7 +145,35 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }else{
             llenado();
+            tiempo();
         }
+    }
+
+    CountDownTimer ctimer;
+
+    private void tiempo(){
+        if(ctimer != null){
+            ctimer.cancel();
+            ctimer = null;
+        }
+
+        ctimer = new CountDownTimer(5000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if(apretado){
+                    apretado = false;
+                    cancel();
+                }
+                int t = ((int)millisUntilFinished + 1000)/1000;
+                btnPrueba.setText("Tiempo: " + t +"s");
+            }
+
+            @Override
+            public void onFinish() {
+                juegoTerminado(frase);
+            }
+        }.start();
     }
 
     @Override
@@ -157,6 +183,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 if(txtNombre1.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
+                    apretado = true;
                 }
                 juegoTerminado(frase);
                 break;
@@ -164,6 +191,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 if(txtNombre2.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))) {
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: " + puntaje);
+                    apretado = true;
                 }
                 juegoTerminado(frase);
                 break;
@@ -171,6 +199,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 if(txtNombre3.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
+                    apretado = true;
                 }
                 juegoTerminado(frase);
                 break;
@@ -178,6 +207,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 if(txtNombre4.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
+                    apretado = true;
                 }
                 juegoTerminado(frase);
                 break;
@@ -185,6 +215,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 if(txtNombre5.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
+                    apretado = true;
                 }
                 juegoTerminado(frase);
                 break;
@@ -192,6 +223,7 @@ public class JuegoActivity extends AppCompatActivity implements View.OnClickList
                 if(txtNombre6.getText().toString() == juego.getRespuesta(aleatorioFrase.get(frase))){
                     puntaje += 10;
                     txtPuntaje.setText("La puntuacion es de: "+puntaje);
+                    apretado = true;
                 }
                 juegoTerminado(frase);
                 break;

@@ -33,11 +33,6 @@ public class Juego {
             "talvez"
     };
 
-//    Context context;
-//    Resources res = getResources();
-  //  String[] planetas = res.getStringArray(R.array.planets_array);
-
-
     public Juego(String nombre[][], String[] frase, int[][] thumbnail, String[] respuestaCorrecta) {
         this.nombre = nombre;
         this.frase = frase;

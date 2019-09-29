@@ -8,4 +8,27 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="btnStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">250dp</item>
+        <item name="android:background">@drawable/btn_background</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/airbnbcereal</item>
+    </style>
+
+    <style name="textStyle">
+        <item name="android:fontFamily">@font/airbnbcereal</item>
+
+
+    </style>
+
 </resources>
